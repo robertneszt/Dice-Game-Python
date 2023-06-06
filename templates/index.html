@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Robert Neszt 0650720 Cloud Security Dice Game</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+  <h1>Robert Neszt's Super Dice Game!</h1>
+  <h2>Please enter both players names:</h2>
+  <form method="POST">
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <label for="player1">Player 1:</label>
+    <input type="text" name="player1" id="player1" required>
+    <br>
+    <br>
+    <label for="player2">Player 2:</label>
+    <input type="text" name="player2" id="player2" required>
+    <br>
+    <br>
+    <button type="submit" style="
+            padding: 30px;
+            background-color: green;
+            color: black;
+            font-size: 30px;
+            height: 35px;
+          ">
+               Start
+            </button>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ROB'S DICE GAME!</title>
+    
+    <link rel="stylesheet" href="/static/css/style.css">
+    <div style="text-align: left;">
+        <form action="{{ url_for('index') }}" method="POST">
+            <button type="submit" style="float: right; background-color: red; color: black; font-size: 25px; padding: 30px; height: 35px;">Exit</button>
+
+
+        </form>
+        <br>
+    </div>
+</head>
+<body>
+    <h1>Please roll or hold, Player {{ session["current_player"] }}: {{ session["player1"] if session["current_player"] == 1 else session["player2"] }}</h1>
+    <br>
+    <div style="display: flex; justify-content: space-between;">
+        <h2 style="text-align: left;">Player 1: {{ session["player1"] }} <br> score: {{ session["score1"] }}</h2>
+        <h2 style="text-align: right;">Player 2: {{ session["player2"] }} <br> score: {{ session["score2"] }}</h2>
+      </div>
+    <h3 style="text-align: center;">Current running rolling score (hold to keep score and pass): {{ session["running_score"] }}</h3>
+    {% if dice_picture %}
+    <div style="text-align: center;">
+        <img src="{{ dice_picture }}" alt="Roll dice">
+      </div>
+    {% endif %}
+    {% if winner %}
+      <div id="winner-container">
+        <h2><span id="winner-name">{{ winner }} has won the game! Please Exit to re-enter names</span></h2>
+        </div>
+    {% elif session['score1'] >= 20 or session['score2'] >= 20 %}
+       <script>
+        document.getElementById("roll-button").disabled = true;
+        document.getElementById("hold-button").disabled = true;
+      </script>
+    {% else %}
+    <form method="POST">
+        <form method="POST">
+            <button type="submit" name="action" value="roll" id="roll-button" style="padding: 30px; background-color: green; color: black; font-size: 30px; height: 35px;">Roll dice</button>
+            <button type="submit" name="action" value="hold" id="hold-button" style="padding: 30px; background-color: purple; color: white; font-size: 30px; height: 35px;">Hold</button>
+          </form>
+    </form>
+    {% endif %}
+</body>
+</html>
